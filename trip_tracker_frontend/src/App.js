@@ -9,6 +9,7 @@ import TripDetailPage from './pages/TripDetailPage';
 import GroupPage from './pages/GroupPage';
 import SummaryPage from './pages/SummaryPage';
 import FlowPage from './pages/FlowPage';
+import HomePage from './pages/HomePage';
 
 function NavBar() {
   const { user, signOutUser, demoMode, toggleDemoMode } = useAuth();
@@ -16,6 +17,7 @@ function NavBar() {
     <div className="navbar">
       <div className="nav-inner">
         <div className="brand">✈️ Trip Tracker</div>
+        <Link to="/" className="btn ghost">Home</Link>
         <Link to="/dashboard" className="btn ghost">Dashboard</Link>
         <Link to="/trips" className="btn ghost">Trips</Link>
         <Link to="/group" className="btn ghost">Group</Link>
@@ -60,7 +62,7 @@ export default function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={
             <ProtectedRoute>
