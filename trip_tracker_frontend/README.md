@@ -1,82 +1,38 @@
-# Lightweight React Template for KAVIA
+# Trip Tracker Frontend
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A modern, responsive React app to plan trip budgets, track spending, split group expenses, and view beautiful summaries.
 
-## Features
+Quick start:
+1) Install dependencies
+   npm install
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+2) Run dev server
+   npm start
 
-## Getting Started
+3) Optional: Enable real auth
+   - Copy .env.example to .env
+   - Fill Firebase config
+   - Sign in with Google
+   App works in Demo Mode without .env
 
-In the project directory, you can run:
+Key routes:
+- /login: Sign in or toggle Demo Mode
+- /dashboard: Trip KPIs, progress bar, charts, quick add expense
+- /trips: Create/edit trips, list, open
+- /trips/:id: Trip details, expenses CRUD, category pie
+- /group: Group balances & suggested settlements
+- /summary: Totals, per-category, balances, export CSV/PDF
+- /flow: Visual flow summary/diagram
 
-### `npm start`
+Env variables (see .env.example):
+- REACT_APP_FIREBASE_* for Firebase Auth
+- REACT_APP_API_BASE_URL (optional) to switch from local storage to a backend
+- REACT_APP_SITE_URL for auth redirects
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Design:
+- Card-based layout with pastel gradients, rounded corners, and soft shadows
+- Mobile-first; bottom navigation cards on mobile, navbar on desktop
 
-### `npm test`
-
-Launches the test runner in interactive watch mode.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
-
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Notes:
+- In Demo Mode, trips and expenses are stored in localStorage with seeded sample data.
+- PDF export uses the browser print dialog for simplicity.
