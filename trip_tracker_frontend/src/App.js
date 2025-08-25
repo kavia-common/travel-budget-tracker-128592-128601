@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import './index.css';
 import { AuthProvider, useAuth } from './auth/AuthContext';
 import LoginPage from './pages/LoginPage';
@@ -59,7 +59,8 @@ function ProtectedRoute({ children }) {
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      {/* Use HashRouter to ensure routing works in preview/proxy environments */}
+      <HashRouter>
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -94,7 +95,7 @@ export default function App() {
         </Routes>
         <div className="footer-space" />
         <MobileNav />
-      </BrowserRouter>
+      </HashRouter>
     </AuthProvider>
   );
 }
