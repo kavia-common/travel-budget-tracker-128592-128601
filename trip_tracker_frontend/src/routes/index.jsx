@@ -1,11 +1,12 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import RootLayout from '../templates/RootLayout';
-import HomePage from '../pages/Home/HomePage';
 import TripsListPage from '../pages/Trips/TripsListPage';
 import TripDetailPage from '../pages/Trips/TripDetailPage';
 import AddExpensePage from '../pages/Expenses/AddExpensePage';
 import NotFoundPage from '../pages/NotFound/NotFoundPage';
+import TripSetup from '../components/trips/TripSetup';
+import DashboardPage from '../pages/Dashboard/DashboardPage';
 
 // Configure app routes with everything public (no auth)
 const router = createBrowserRouter([
@@ -13,12 +14,12 @@ const router = createBrowserRouter([
     path: '/',
     element: <RootLayout />,
     children: [
-      // Home now shows Trip Setup on top and Dashboard below
-      { index: true, element: <HomePage /> },
+      // Landing page is now Trip Setup only
+      { index: true, element: <TripSetup /> },
+      { path: 'dashboard', element: <DashboardPage /> },
       { path: 'trips', element: <TripsListPage /> },
       { path: 'trips/:tripId', element: <TripDetailPage /> },
       { path: 'expenses/add', element: <AddExpensePage /> },
-      // removed standalone Trip Setup route to keep entry seamless
     ],
   },
   { path: '*', element: <NotFoundPage /> },

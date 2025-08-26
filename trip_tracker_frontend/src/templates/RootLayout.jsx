@@ -12,7 +12,8 @@ export default function RootLayout() {
       <aside className="sidebar">
         <div className="brand">Trip Tracker</div>
         <nav className="nav">
-          <NavLink to="/" end>Home</NavLink>
+          <NavLink to="/" end>Trip Setup</NavLink>
+          <NavLink to="/dashboard">Dashboard</NavLink>
           <NavLink to="/trips">Trips</NavLink>
           <NavLink to="/expenses/add">Add Expense</NavLink>
         </nav>
