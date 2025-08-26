@@ -1,0 +1,103 @@
+.tt-trip-setup {
+  /* Background image setup */
+  position: relative; /* to anchor overlays */
+  background-image: url('../../assets/trip-setup-bg.svg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+
+  /* Gentle rounding/shadow already from card, keep readable stacking */
+  overflow: hidden;
+  isolation: isolate; /* create new stacking context for safe z-index */
+}
+
+/* Soft overlay for readability of fields and labels */
+.tt-trip-setup::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Light frosted layer: slightly stronger in center, softer at edges */
+  background:
+    radial-gradient(60% 50% at 50% 30%, rgba(255,255,255,0.66), rgba(255,255,255,0.30) 60%, rgba(255,255,255,0.18) 100%);
+  pointer-events: none;
+  backdrop-filter: blur(1.5px) saturate(110%);
+}
+
+/* Ensure all content sits above overlays */
+.tt-trip-setup > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Tweak inner paddings and layout for a hero-like section */
+.tt-trip-setup .tt-card__header {
+  position: relative;
+  z-index: 1;
+}
+
+.tt-trip-setup .tt-card__title {
+  /* Slight shadow for title over bright bg areas */
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .tt-trip-setup {
+    background-position: center top;
+    background-size: 140% auto; /* zoom slightly on mobile to keep blobs soft */
+  }
+  .tt-trip-setup form .grid {
+    gap: var(--space-4);
+  }
+  .tt-trip-setup form .grid[style*="grid-template-columns: '2fr 1fr 1fr'"],
+  .tt-trip-setup form .grid[style*="2fr 1fr 1fr"],
+  .tt-trip-setup form .grid[style*="1fr auto 1fr"],
+  .tt-trip-setup form .grid[style*="2fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Slightly increase overlay in dark theme for higher contrast */
+[data-theme="dark"] .tt-trip-setup::after {
+  background:
+    radial-gradient(60% 50% at 50% 30%, rgba(17,24,39,0.28), rgba(17,24,39,0.20) 60%, rgba(17,24,39,0.14) 100%),
+    linear-gradient(180deg, rgba(17,24,39,0.10), transparent);
+  backdrop-filter: blur(2px) saturate(110%);
+}
+
+/* Improve form field clarity over background by slightly elevating inputs */
+.tt-trip-setup .field input,
+.tt-trip-setup .field select,
+.tt-trip-setup .field textarea {
+  background: color-mix(in srgb, var(--color-surface) 92%, var(--color-primary));
+  border-color: color-mix(in srgb, var(--color-border) 88%, var(--color-primary));
+  box-shadow: 0 1px 0 rgba(16, 24, 40, 0.02);
+}
+
+/* Fallback for browsers without color-mix */
+@supports not (background: color-mix(in srgb, white, black)) {
+  .tt-trip-setup .field input,
+  .tt-trip-setup .field select,
+  .tt-trip-setup .field textarea {
+    background: rgba(255,255,255,0.92);
+    border-color: rgba(31, 43, 46, 0.12);
+  }
+}
+
+/* Keep switches and tokens readable over the hero */
+.tt-trip-setup .switch {
+  background: rgba(255,255,255,0.8);
+  border-color: var(--color-border);
+}
+
+.tt-trip-setup .card {
+  background: rgba(255,255,255,0.86);
+  border-color: var(--color-border);
+}
+
+/* Ensure gradient on Card (with-gradient) remains subtle over the bg */
+.tt-trip-setup.with-gradient::before {
+  opacity: 0.75;
+  z-index: 0; /* still below content */
+}

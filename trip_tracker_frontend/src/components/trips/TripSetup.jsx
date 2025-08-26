@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import Card from '../common/Card';
+import './trip-setup.css';
 
 /**
  * PUBLIC_INTERFACE
@@ -54,11 +55,6 @@ export default function TripSetup() {
       subtitle="Plan your next adventure: set dates, budget, and invite friends."
       className="tt-trip-setup"
       aria-label="Trip setup form"
-      style={{
-        /* add subtle translucent layer so text stands out over background */
-        backgroundColor: 'rgba(255,255,255,0.6)',
-        backdropFilter: 'saturate(120%) blur(2px)',
-      }}
     >
       <form onSubmit={handleSubmit} className="stack-md" style={{ width: '100%' }}>
         {/* Row: name + dates */}
