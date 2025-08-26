@@ -12,12 +12,12 @@
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
+  gap: var(--space-4);
 }
 
 .brand {
   font-weight: 800;
   font-size: var(--font-size-lg);
-  margin-bottom: var(--space-4);
 }
 
 .nav {
@@ -31,6 +31,7 @@
   text-decoration: none;
   padding: 8px 10px;
   border-radius: var(--radius-sm);
+  transition: background 0.15s ease, transform 0.12s ease;
 }
 
 .nav a.active, .nav a:hover {
@@ -41,7 +42,6 @@
 
 .panel .btn { width: 100%; }
 
-/* Remove local btn styles; rely on design-system .btn from components.css for consistency */
 .content {
   padding: var(--space-6);
 }
@@ -57,10 +57,16 @@
     flex-direction: row;
     gap: var(--space-3);
     align-items: center;
+    padding: var(--space-4);
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
   }
   .nav {
     flex-direction: row;
     gap: var(--space-3);
   }
   .spacer { display: none; }
+  .panel {
+    display: none; /* hide quick actions on mobile to keep header tidy */
+  }
 }

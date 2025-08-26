@@ -3,6 +3,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 import './root-layout.css';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../services/auth/AuthContext';
+import Card from '../components/common/Card';
 
 export default function RootLayout() {
   const { theme, toggleTheme } = useTheme();
@@ -18,16 +19,18 @@ export default function RootLayout() {
           <NavLink to="/expenses/add">Add Expense</NavLink>
         </nav>
         <div className="spacer" />
-        <div className="panel">
-          <button className="btn" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-          </button>
-          {user && (
-            <button className="btn secondary" onClick={logout} style={{ marginTop: 8 }}>
-              Logout
+        <Card padded className="panel" variant="teal" gradient title="Quick Actions" subtitle="Personalize your view">
+          <div className="stack-sm">
+            <button className="btn" onClick={toggleTheme} aria-label="Toggle theme">
+              {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
             </button>
-          )}
-        </div>
+            {user && (
+              <button className="btn secondary" onClick={logout}>
+                Logout
+              </button>
+            )}
+          </div>
+        </Card>
       </aside>
       <main className="content">
         <Outlet />

@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
  */
 export default function NotFoundPage() {
   return (
-    <div style={{ padding: 24 }}>
+    <section className="container stack-md" style={{ paddingTop: 'var(--space-8)' }}>
       <h2>Page not found</h2>
       <p>Sorry, we couldn't find that page.</p>
       <Link to="/" className="btn">Go Home</Link>
-    </div>
+    </section>
   );
 }
