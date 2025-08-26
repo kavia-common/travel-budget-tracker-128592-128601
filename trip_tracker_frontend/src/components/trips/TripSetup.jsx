@@ -56,6 +56,11 @@ export default function TripSetup() {
       className="tt-trip-setup"
       aria-label="Trip setup form"
     >
+      {/* Explicit background image element to ensure visibility behind overlay and content */}
+      <div
+        className="tt-trip-setup__bg"
+        aria-hidden="true"
+      />
       <form onSubmit={handleSubmit} className="stack-md" style={{ width: '100%' }}>
         {/* Row: name + dates */}
         <div className="grid" style={{ gridTemplateColumns: '2fr 1fr 1fr' }}>

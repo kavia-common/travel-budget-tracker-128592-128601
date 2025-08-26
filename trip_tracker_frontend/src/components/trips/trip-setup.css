@@ -1,5 +1,5 @@
 .tt-trip-setup {
-  /* Background image setup */
+  /* Background fallback via CSS in case the explicit element fails to load */
   position: relative; /* to anchor overlays */
   background-image: url('../../assets/trip-setup-bg.svg');
   background-repeat: no-repeat;
@@ -9,6 +9,20 @@
   /* Gentle rounding/shadow already from card, keep readable stacking */
   overflow: hidden;
   isolation: isolate; /* create new stacking context for safe z-index */
+}
+
+/* Dedicated background element for stronger visibility and control */
+.tt-trip-setup .tt-trip-setup__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1; /* behind everything within stacking context */
+  background-image: url('../../assets/trip-setup-bg.svg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  filter: blur(2px) saturate(105%);
+  opacity: 0.9; /* make sure artwork is clearly visible */
+  pointer-events: none;
 }
 
 /* Soft overlay for readability of fields and labels */
@@ -46,6 +60,11 @@
   .tt-trip-setup {
     background-position: center top;
     background-size: 140% auto; /* zoom slightly on mobile to keep blobs soft */
+  }
+  .tt-trip-setup .tt-trip-setup__bg {
+    background-position: center top;
+    background-size: 160% auto;
+    filter: blur(2.5px) saturate(110%);
   }
   .tt-trip-setup form .grid {
     gap: var(--space-4);
