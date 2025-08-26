@@ -1,0 +1,69 @@
+/* Card styles using design tokens */
+
+.tt-card {
+  position: relative;
+  background: var(--card-bg);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.12s ease, background 0.2s ease;
+}
+
+.tt-card.padded .tt-card__body { padding: var(--card-padding); }
+.tt-card.no-pad .tt-card__body { padding: 0; }
+
+.tt-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(20, 38, 54, 0.10), 0 3px 10px rgba(20, 38, 54, 0.06);
+}
+
+.tt-card::before {
+  /* for gradient overlay */
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  background: var(--gradient-card);
+}
+.tt-card.with-gradient::before { opacity: 1; }
+
+.tt-card__header {
+  padding: var(--space-5) var(--space-6) 0 var(--space-6);
+}
+.tt-card__title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-snug);
+}
+.tt-card__subtitle {
+  margin: var(--space-2) 0 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.tt-card__footer {
+  padding: 0 var(--space-6) var(--space-5) var(--space-6);
+  border-top: 1px solid var(--color-border);
+  background: linear-gradient(180deg, rgba(255,255,255,0), rgba(0,0,0,0.02));
+}
+
+/* Pastel variants (soft tinted backgrounds) */
+.tt-card.variant-teal {
+  background: color-mix(in srgb, var(--color-surface) 88%, var(--color-primary));
+}
+.tt-card.variant-peach {
+  background: color-mix(in srgb, var(--color-surface) 88%, var(--color-secondary));
+}
+.tt-card.variant-sun {
+  background: color-mix(in srgb, var(--color-surface) 90%, var(--color-accent));
+}
+
+/* Fallback for browsers without color-mix */
+@supports not (background: color-mix(in srgb, white, black)) {
+  .tt-card.variant-teal { background: rgba(108, 198, 203, 0.10); }
+  .tt-card.variant-peach { background: rgba(246, 199, 182, 0.12); }
+  .tt-card.variant-sun { background: rgba(255, 212, 107, 0.10); }
+}

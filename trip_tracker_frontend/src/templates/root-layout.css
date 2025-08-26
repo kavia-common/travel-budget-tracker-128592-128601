@@ -9,60 +9,41 @@
 .sidebar {
   background: var(--bg-secondary);
   border-right: 1px solid var(--border-color);
-  padding: 16px;
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
 }
 
 .brand {
   font-weight: 800;
-  font-size: 18px;
-  margin-bottom: 16px;
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-4);
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .nav a {
   color: var(--text-primary);
   text-decoration: none;
   padding: 8px 10px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
 }
 
 .nav a.active, .nav a:hover {
   background: rgba(100, 100, 100, 0.08);
 }
 
-.spacer {
-  flex: 1;
-}
+.spacer { flex: 1; }
 
-.panel .btn {
-  width: 100%;
-}
+.panel .btn { width: 100%; }
 
-.btn {
-  background: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 12px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn.secondary {
-  background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-}
-
+/* Remove local btn styles; rely on design-system .btn from components.css for consistency */
 .content {
-  padding: 20px;
+  padding: var(--space-6);
 }
 
 /* Responsive */
@@ -74,14 +55,12 @@
   .sidebar {
     grid-row: 1;
     flex-direction: row;
-    gap: 12px;
+    gap: var(--space-3);
     align-items: center;
   }
   .nav {
     flex-direction: row;
-    gap: 12px;
+    gap: var(--space-3);
   }
-  .spacer {
-    display: none;
-  }
+  .spacer { display: none; }
 }
