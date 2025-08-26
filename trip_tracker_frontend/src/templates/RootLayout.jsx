@@ -14,6 +14,7 @@ export default function RootLayout() {
         <nav className="nav">
           <NavLink to="/" end>Dashboard</NavLink>
           <NavLink to="/trips">Trips</NavLink>
+          <NavLink to="/trip-setup">Trip Setup</NavLink>
           <NavLink to="/expenses/add">Add Expense</NavLink>
         </nav>
         <div className="spacer" />
