@@ -10,6 +10,17 @@
   transition: box-shadow 0.2s ease, transform 0.12s ease, background 0.2s ease;
 }
 
+/* Trip Setup background helper: softly blurred pastel background behind content */
+.tt-trip-setup {
+  /* ensure content has a subtle padded canvas and background image */
+  background-image: url('../../assets/trip-setup-bg.svg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  /* add a frosted overlay to increase text readability */
+  backdrop-filter: blur(2px);
+}
+
 .tt-card.padded .tt-card__body { padding: var(--card-padding); }
 .tt-card.no-pad .tt-card__body { padding: 0; }
 
