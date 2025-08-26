@@ -6,19 +6,12 @@ import TripsListPage from '../pages/Trips/TripsListPage';
 import TripDetailPage from '../pages/Trips/TripDetailPage';
 import AddExpensePage from '../pages/Expenses/AddExpensePage';
 import NotFoundPage from '../pages/NotFound/NotFoundPage';
-import LoginPage from '../pages/Auth/LoginPage';
-import SignupPage from '../pages/Auth/SignupPage';
-import RequireAuth from '../routes/route-guards/RequireAuth';
 
-// Configure app routes with public and protected sections
+// Configure app routes with everything public (no auth)
 const router = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <RequireAuth>
-        <RootLayout />
-      </RequireAuth>
-    ),
+    element: <RootLayout />,
     children: [
       { index: true, element: <DashboardPage /> },
       { path: 'trips', element: <TripsListPage /> },
@@ -26,8 +19,6 @@ const router = createBrowserRouter([
       { path: 'expenses/add', element: <AddExpensePage /> },
     ],
   },
-  { path: '/login', element: <LoginPage /> },
-  { path: '/signup', element: <SignupPage /> },
   { path: '*', element: <NotFoundPage /> },
 ]);
 

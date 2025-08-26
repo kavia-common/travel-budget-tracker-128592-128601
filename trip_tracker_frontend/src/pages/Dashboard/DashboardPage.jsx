@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import { useAuth } from '../../services/auth/AuthContext';
 import Card from '../../components/common/Card';
 import { DonutChartPlaceholder, BarChartPlaceholder, TrendLinePlaceholder } from '../../components/common/InfographicPlaceholders';
 import { formatCurrency } from '../../utils/format';
@@ -10,7 +9,6 @@ import { formatCurrency } from '../../utils/format';
  * budget status and visual sections aligned with extracted patterns.
  */
 export default function DashboardPage() {
-  const { user } = useAuth();
   const displayName = 'Taha'; // Personalized demo per spec
 
   // Demo state for Group/Friends segmented control
@@ -29,9 +27,9 @@ export default function DashboardPage() {
       <header className="inline-between">
         <div className="stack-xs">
           <h1>Welcome {displayName} 👋</h1>
-          <div className="avatar-chip" aria-label="Signed in user">
+          <div className="avatar-chip" aria-label="User">
             <span className="avatar" />
-            <span style={{ color: 'var(--color-text-muted)' }}>{user?.email || 'traveler@trip.app'}</span>
+            <span style={{ color: 'var(--color-text-muted)' }}>traveler@trip.app</span>
           </div>
         </div>
         <div className="segmented" role="group" aria-label="View mode">
