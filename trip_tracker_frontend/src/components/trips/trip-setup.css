@@ -2,35 +2,45 @@
 .tt-setup-hero {
   position: relative;
   padding: var(--space-12) 0 var(--space-16);
-  background: var(--gradient-hero), var(--color-bg-muted);
+  background: var(--color-bg); /* base behind image for safe fallback */
   overflow: hidden;
   isolation: isolate;
 }
 
+/* Full-bleed scenic background image layer */
 .tt-setup-hero__bg {
   position: absolute;
   inset: 0;
-  z-index: -2;
-  background-image: url('../../assets/trip-setup-bg.svg');
+  z-index: -3; /* bottom-most */
+  /* Use CSS variable hook so we don't hard-require a file during build.
+     Default to existing SVG asset that already exists in repo. */
+  --tt-setup-bg-image: url('../../assets/trip-setup-bg.svg');
+  background-image: var(--tt-setup-bg-image);
   background-repeat: no-repeat;
-  background-position: center -120px;
-  background-size: 140% auto;
-  opacity: 0.9;
-  filter: blur(2px) saturate(110%);
-  transform: scale(1.02);
+  background-position: center center;
+  background-size: cover;
+  transform: scale(1.02); /* slight scale to avoid edge gaps on blur */
+  filter: brightness(0.65) saturate(110%); /* initial darken to improve contrast */
 }
-.tt-setup-hero::after {
-  /* subtle white veil to ensure legibility */
+
+/* Soft overlay veil to ensure text/form readability regardless of image colors */
+.tt-setup-hero__veil {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: -1;
-  background: radial-gradient(60% 55% at 50% 28%, rgba(255,255,255,0.82), rgba(255,255,255,0.42) 55%, rgba(255,255,255,0.22) 100%);
+  z-index: -2;
   pointer-events: none;
+  /* combine radial focus light + subtle backdrop blur */
+  background:
+    radial-gradient(60% 55% at 50% 28%, rgba(255,255,255,0.40), rgba(255,255,255,0.20) 55%, rgba(255,255,255,0.10) 100%),
+    linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+  backdrop-filter: blur(2.5px);
 }
 
 /* Hero heading section */
 .tt-setup-hero__container {
+  position: relative;
+  z-index: 0; /* above overlays */
   display: grid;
   gap: var(--space-8);
 }
@@ -43,10 +53,12 @@
   font-weight: 800;
   color: var(--color-text); /* black/near-black */
   letter-spacing: -0.02em;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.35); /* slight lift over darker bg */
 }
 .tt-setup-hero__subtitle {
   color: var(--color-text-muted);
   font-size: var(--font-size-lg);
+  text-shadow: 0 1px 1px rgba(255,255,255,0.25);
 }
 .tt-setup-accents {
   display: inline-flex;
@@ -64,13 +76,15 @@
 .dot-pink  { background: var(--accent-pink); }
 .dot-blue  { background: var(--brand-primary); }
 
-/* Floating white card for the form */
+/* Floating white card for the form with strong contrast */
 .tt-setup-card {
+  position: relative;
+  z-index: 1; /* ensure above bg & veils */
   margin-top: var(--space-4);
   border-radius: var(--radius-xl);
-  box-shadow: 0 24px 60px rgba(2, 6, 23, 0.14), var(--shadow-soft);
-  border: 1px solid var(--color-border);
-  background: #fff;
+  box-shadow: 0 24px 60px rgba(2, 6, 23, 0.18), var(--shadow-soft);
+  border: 1px solid rgba(255,255,255,0.7); /* crisper against photo bg */
+  background: #ffffff; /* solid white for strong contrast */
 }
 
 /* Search-bar-like row behavior */
@@ -126,8 +140,6 @@
 }
 
 /* Invite link presentation */
-
-/* Invite link presentation */
 .tt-setup-link .card {
   display: flex;
   align-items: center;
@@ -176,9 +188,9 @@
     padding: var(--space-10) 0 var(--space-12);
   }
   .tt-setup-hero__bg {
-    background-position: center -80px;
-    background-size: 180% auto;
-    filter: blur(3px) saturate(112%);
+    background-position: center center;
+    background-size: cover;
+    filter: brightness(0.6) saturate(112%) blur(1px);
   }
   .tt-setup-row {
     grid-template-columns: 1fr;
@@ -197,11 +209,14 @@
 }
 
 /* Dark theme adjustments */
-[data-theme="dark"] .tt-setup-hero::after {
+[data-theme="dark"] .tt-setup-hero__veil {
   background:
-    radial-gradient(60% 55% at 50% 28%, rgba(17,24,39,0.46), rgba(17,24,39,0.28) 55%, rgba(17,24,39,0.18) 100%);
+    radial-gradient(60% 55% at 50% 28%, rgba(17,24,39,0.46), rgba(17,24,39,0.28) 55%, rgba(17,24,39,0.18) 100%),
+    linear-gradient(180deg, rgba(17,24,39,0.22), rgba(17,24,39,0.18));
+  backdrop-filter: blur(2.5px);
 }
 [data-theme="dark"] .tt-setup-card {
   background: var(--color-surface);
+  border: 1px solid var(--color-border);
   box-shadow: var(--shadow-soft);
 }

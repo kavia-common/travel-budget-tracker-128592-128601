@@ -45,8 +45,9 @@ export default function TripSetup() {
 
   return (
     <section className="tt-setup-hero">
-      {/* Subtle background art and soft gradient layer handled by CSS */}
+      {/* Full-bleed background image and overlay handled via CSS layers */}
       <div className="tt-setup-hero__bg" aria-hidden="true" />
+      <div className="tt-setup-hero__veil" aria-hidden="true" />
 
       <div className="container tt-setup-hero__container">
         {/* Hero heading area with bold title and gray subtext */}
