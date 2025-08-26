@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Card from '../../components/common/Card';
 import { DonutChartPlaceholder, BarChartPlaceholder, TrendLinePlaceholder } from '../../components/common/InfographicPlaceholders';
 import { formatCurrency } from '../../utils/format';
+import TripSetup from '../../components/trips/TripSetup';
 
 /**
  * PUBLIC_INTERFACE
@@ -24,6 +25,9 @@ export default function DashboardPage() {
 
   return (
     <section className="container stack-lg">
+      {/* New Trip Setup section */}
+      <TripSetup />
+
       <header className="inline-between">
         <div className="stack-xs">
           <h1>Welcome {displayName} 👋</h1>
