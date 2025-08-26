@@ -35,7 +35,8 @@
 }
 
 .nav a.active, .nav a:hover {
-  background: rgba(100, 100, 100, 0.08);
+  background: var(--brand-primary-10);
+  color: var(--brand-primary);
 }
 
 .spacer { flex: 1; }

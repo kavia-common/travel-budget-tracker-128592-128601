@@ -1,18 +1,20 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useAuth } from '../../services/auth/AuthContext';
-import { useTheme } from '../../context/ThemeContext';
 import Card from '../../components/common/Card';
 import { DonutChartPlaceholder, BarChartPlaceholder, TrendLinePlaceholder } from '../../components/common/InfographicPlaceholders';
 import { formatCurrency } from '../../utils/format';
 
 /**
  * PUBLIC_INTERFACE
- * Dashboard landing page with aligned card grid, budget tracker, analytics placeholders,
- * and stubs for activity suggestions and personalized recommendations.
+ * Dashboard landing page showing personalized greeting, group/friends split control,
+ * budget status and visual sections aligned with extracted patterns.
  */
 export default function DashboardPage() {
   const { user } = useAuth();
-  const { theme } = useTheme();
+  const displayName = 'Taha'; // Personalized demo per spec
+
+  // Demo state for Group/Friends segmented control
+  const [mode, setMode] = useState('group'); // 'group' | 'friends'
 
   // Placeholder demo budget data and computed memo for future live updates
   const budget = useMemo(() => ({
@@ -24,15 +26,36 @@ export default function DashboardPage() {
 
   return (
     <section className="container stack-lg">
-      <header className="stack-sm">
-        <h1>Welcome {user?.name || 'Traveler'} 👋</h1>
-        <p>Theme: <strong>{theme}</strong></p>
+      <header className="inline-between">
+        <div className="stack-xs">
+          <h1>Welcome {displayName} 👋</h1>
+          <div className="avatar-chip" aria-label="Signed in user">
+            <span className="avatar" />
+            <span style={{ color: 'var(--color-text-muted)' }}>{user?.email || 'traveler@trip.app'}</span>
+          </div>
+        </div>
+        <div className="segmented" role="group" aria-label="View mode">
+          <button
+            type="button"
+            onClick={() => setMode('group')}
+            aria-pressed={mode === 'group'}
+          >
+            Group
+          </button>
+          <button
+            type="button"
+            onClick={() => setMode('friends')}
+            aria-pressed={mode === 'friends'}
+          >
+            Friends
+          </button>
+        </div>
       </header>
 
       <div className="grid-cards">
-        {/* Expense Tracker prominent card */}
+        {/* Budget & Spending */}
         <div className="col-8">
-          <Card title="Expense Tracker" subtitle="Real-time budget status" gradient variant="teal">
+          <Card title="Budget & Spending" subtitle={`Mode: ${mode === 'group' ? 'Group Split' : 'Friends Split'}`} gradient variant="teal">
             <div className="stack-md">
               <div className="inline-between">
                 <div className="inline">
@@ -48,6 +71,8 @@ export default function DashboardPage() {
                   <strong>{pctUsed}%</strong>
                 </div>
               </div>
+
+              {/* Progress */}
               <div style={{ height: 10, background: 'var(--color-surface-muted)', borderRadius: 999 }}>
                 <div
                   role="progressbar"
@@ -63,6 +88,19 @@ export default function DashboardPage() {
                   }}
                 />
               </div>
+
+              {/* Category selector (mobile-inspired tokens) */}
+              <div className="inline" aria-label="Filter by category">
+                <div className="cat-token blue" title="Flights">✈️</div>
+                <div className="cat-token teal" title="Ride">🚕</div>
+                <div className="cat-token pink" title="Food">🍽️</div>
+                <div className="cat-token green" title="Groceries">🛒</div>
+                <div className="cat-token charcoal" title="Activities">🎭</div>
+                <div className="cat-token orange" title="Drinks">☕</div>
+                <div className="cat-token amber" title="Lodging">🏨</div>
+              </div>
+
+              {/* Charts trio */}
               <div className="grid grid-3">
                 <div className="stack-sm" style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
                   <DonutChartPlaceholder />
@@ -101,9 +139,6 @@ export default function DashboardPage() {
               <li>Try local street food markets tonight</li>
               <li>Discount museum entry on Wednesday</li>
             </ul>
-            {/* PUBLIC_INTERFACE
-                Future hook: useActivitySuggestions(tripId) will hydrate this card with personalized suggestions.
-            */}
           </Card>
         </div>
 
@@ -115,9 +150,6 @@ export default function DashboardPage() {
               <li>Transport spend rising — consider a day pass 🚇</li>
               <li>Look out for off-peak attractions to save more 🎟️</li>
             </ul>
-            {/* PUBLIC_INTERFACE
-                Future hook: usePersonalizedRecommendations(userId, tripId) to populate recommendations.
-            */}
           </Card>
         </div>
 

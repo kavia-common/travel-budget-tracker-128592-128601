@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import Card from '../../components/common/Card';
-import { FaBus, FaUtensils, FaHotel, FaLandmark, FaShoppingBag, FaEllipsisH } from 'react-icons/fa';
+import { FaBus, FaUtensils, FaHotel, FaLandmark, FaShoppingBag, FaEllipsisH, FaPlane } from 'react-icons/fa';
 
 /**
  * PUBLIC_INTERFACE
@@ -9,12 +9,14 @@ import { FaBus, FaUtensils, FaHotel, FaLandmark, FaShoppingBag, FaEllipsisH } fr
  */
 export default function AddExpensePage() {
   const categories = useMemo(() => ([
-    { key: 'Transport', icon: <FaBus />, color: 'var(--color-primary)' },
-    { key: 'Food', icon: <FaUtensils />, color: 'var(--color-secondary)' },
-    { key: 'Stays', icon: <FaHotel />, color: 'var(--color-primary)' },
-    { key: 'Attractions', icon: <FaLandmark />, color: 'var(--color-accent)' },
-    { key: 'Shopping', icon: <FaShoppingBag />, color: 'var(--color-secondary)' },
-    { key: 'Other', icon: <FaEllipsisH />, color: 'var(--color-text-muted)' },
+    { key: 'Flights', icon: <FaPlane />, tone: 'blue' },
+    { key: 'Ride', icon: <FaBus />, tone: 'teal' },
+    { key: 'Food', icon: <FaUtensils />, tone: 'pink' },
+    { key: 'Groceries', icon: <FaShoppingBag />, tone: 'green' },
+    { key: 'Activities', icon: <FaLandmark />, tone: 'charcoal' },
+    { key: 'Drinks', icon: <FaUtensils />, tone: 'orange' },
+    { key: 'Lodging', icon: <FaHotel />, tone: 'amber' },
+    { key: 'Other', icon: <FaEllipsisH />, tone: 'charcoal' },
   ]), []);
 
   const [form, setForm] = useState({
@@ -57,24 +59,28 @@ export default function AddExpensePage() {
         <div className="col-8">
           <Card variant="peach" gradient title="Quick Add" subtitle="Record a new expense">
             <form onSubmit={handleSubmit} className="stack-md" style={{ maxWidth: 640 }}>
-              {/* Category chips */}
-              <div className="chips" aria-label="Choose a category">
+              {/* Category tokens (mobile-style) */}
+              <div className="inline" aria-label="Choose a category">
                 {categories.map((c) => (
                   <button
                     key={c.key}
                     type="button"
-                    className={`chip ${form.category === c.key ? 'active' : ''}`}
+                    className={`cat-token ${c.tone} ${form.category === c.key ? 'active' : ''}`}
                     onClick={() => setCategory(c.key)}
                     aria-pressed={form.category === c.key}
                     title={c.key}
-                    style={{ color: c.color }}
                   >
-                    <span style={{
-                      width: 28, height: 28, display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                      borderRadius: '50%', background: 'var(--color-surface)', border: '1px solid var(--color-border)'
-                    }}>{c.icon}</span>
-                    {c.key}
+                    <span aria-hidden>{c.icon}</span>
                   </button>
+                ))}
+              </div>
+
+              {/* Category chips with labels (secondary selector and descriptive) */}
+              <div className="chips" aria-hidden>
+                {categories.map((c) => (
+                  <span key={`${c.key}-chip`} className={`chip ${form.category === c.key ? 'active' : ''}`}>
+                    {c.icon} {c.key}
+                  </span>
                 ))}
               </div>
 
@@ -125,7 +131,7 @@ export default function AddExpensePage() {
 
               <div className="inline-between">
                 <small style={{ color: 'var(--color-text-muted)' }}>
-                  Tip: Categories also appear as filters and analytics later.
+                  Tip: Category tokens update your analytics instantly.
                 </small>
                 <button className="btn" type="submit">Add Expense</button>
               </div>
@@ -149,9 +155,6 @@ export default function AddExpensePage() {
               <div className="inline">
                 <strong>Notes:</strong> <span>{form.notes || '-'}</span>
               </div>
-              {/* PUBLIC_INTERFACE
-                  Future hook: useExpenseMonitoring(form) to suggest budgets and detect anomalies.
-              */}
             </div>
           </Card>
         </div>

@@ -2,12 +2,10 @@ import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import './root-layout.css';
 import { useTheme } from '../context/ThemeContext';
-import { useAuth } from '../services/auth/AuthContext';
 import Card from '../components/common/Card';
 
 export default function RootLayout() {
   const { theme, toggleTheme } = useTheme();
-  const { user, logout } = useAuth();
 
   return (
     <div className="layout">
@@ -24,11 +22,6 @@ export default function RootLayout() {
             <button className="btn" onClick={toggleTheme} aria-label="Toggle theme">
               {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
             </button>
-            {user && (
-              <button className="btn secondary" onClick={logout}>
-                Logout
-              </button>
-            )}
           </div>
         </Card>
       </aside>
