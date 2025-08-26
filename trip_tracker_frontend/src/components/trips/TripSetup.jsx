@@ -53,6 +53,9 @@ export default function TripSetup() {
       padded
       title="Trip Setup"
       subtitle="Plan your next adventure: set dates, budget, and invite friends."
+      /* To switch to the high-quality photo background, add 'use-photo' to the className below:
+         className="tt-trip-setup use-photo"
+         Ensure src/assets/trip-setup-bg-photo.jpg exists (copied from attachments). */
       className="tt-trip-setup"
       aria-label="Trip setup form"
     >

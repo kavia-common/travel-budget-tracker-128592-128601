@@ -20,10 +20,23 @@
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
-  filter: blur(2px) saturate(105%);
-  opacity: 0.9; /* make sure artwork is clearly visible */
+
+  /* Make the artwork truly present but keep types clear */
+  filter: blur(3px) saturate(112%) contrast(102%);
+  opacity: 0.95; /* strong presence */
+  transform: scale(1.02); /* slight zoom to avoid visible edges after blur */
   pointer-events: none;
 }
+
+/* Optional modifier to use the high-quality JPG as the background source.
+   NOTE: This rule is intentionally a no-op until the asset is added to src/assets
+   to avoid build failures. After copying the photo as src/assets/trip-setup-bg-photo.jpg,
+   uncomment the background-image line below. */
+/*
+.tt-trip-setup.use-photo .tt-trip-setup__bg {
+  background-image: url('../../assets/trip-setup-bg-photo.jpg');
+}
+*/
 
 /* Soft overlay for readability of fields and labels */
 .tt-trip-setup::after {
@@ -33,9 +46,9 @@
   z-index: 0;
   /* Light frosted layer: slightly stronger in center, softer at edges */
   background:
-    radial-gradient(60% 50% at 50% 30%, rgba(255,255,255,0.66), rgba(255,255,255,0.30) 60%, rgba(255,255,255,0.18) 100%);
+    radial-gradient(60% 55% at 50% 28%, rgba(255,255,255,0.72), rgba(255,255,255,0.34) 60%, rgba(255,255,255,0.20) 100%);
   pointer-events: none;
-  backdrop-filter: blur(1.5px) saturate(110%);
+  backdrop-filter: blur(2px) saturate(112%);
 }
 
 /* Ensure all content sits above overlays */
@@ -44,7 +57,7 @@
   z-index: 1;
 }
 
-/* Tweak inner paddings and layout for a hero-like section */
+/* Header layering and subtle text legibility boost */
 .tt-trip-setup .tt-card__header {
   position: relative;
   z-index: 1;
@@ -63,8 +76,9 @@
   }
   .tt-trip-setup .tt-trip-setup__bg {
     background-position: center top;
-    background-size: 160% auto;
-    filter: blur(2.5px) saturate(110%);
+    background-size: 170% auto;
+    filter: blur(3.5px) saturate(115%) contrast(103%);
+    transform: scale(1.04);
   }
   .tt-trip-setup form .grid {
     gap: var(--space-4);
@@ -80,9 +94,9 @@
 /* Slightly increase overlay in dark theme for higher contrast */
 [data-theme="dark"] .tt-trip-setup::after {
   background:
-    radial-gradient(60% 50% at 50% 30%, rgba(17,24,39,0.28), rgba(17,24,39,0.20) 60%, rgba(17,24,39,0.14) 100%),
-    linear-gradient(180deg, rgba(17,24,39,0.10), transparent);
-  backdrop-filter: blur(2px) saturate(110%);
+    radial-gradient(60% 50% at 50% 30%, rgba(17,24,39,0.36), rgba(17,24,39,0.24) 60%, rgba(17,24,39,0.18) 100%),
+    linear-gradient(180deg, rgba(17,24,39,0.12), transparent);
+  backdrop-filter: blur(2.2px) saturate(110%);
 }
 
 /* Improve form field clarity over background by slightly elevating inputs */
@@ -99,19 +113,19 @@
   .tt-trip-setup .field input,
   .tt-trip-setup .field select,
   .tt-trip-setup .field textarea {
-    background: rgba(255,255,255,0.92);
-    border-color: rgba(31, 43, 46, 0.12);
+    background: rgba(255,255,255,0.94);
+    border-color: rgba(31, 43, 46, 0.14);
   }
 }
 
 /* Keep switches and tokens readable over the hero */
 .tt-trip-setup .switch {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.86);
   border-color: var(--color-border);
 }
 
 .tt-trip-setup .card {
-  background: rgba(255,255,255,0.86);
+  background: rgba(255,255,255,0.90);
   border-color: var(--color-border);
 }
 
