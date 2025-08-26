@@ -18,34 +18,35 @@ export default function TripsListPage() {
         <h2>Your Trips</h2>
       </header>
 
-      <div className="grid grid-2">
+      <div className="grid-cards">
         {demoTrips.map((t) => {
           const pct = Math.min(100, Math.round((t.spent / t.budget) * 100));
           return (
-            <Card
-              key={t.id}
-              title={t.name}
-              subtitle={`Budget: ${formatCurrency(t.budget)} • Spent: ${formatCurrency(t.spent)}`}
-              variant="teal"
-              gradient
-              footer={
-                <div className="stack-sm" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <a href={`/trips/${t.id}`} className="btn">Open</a>
-                  <span className="badge sun">{pct}% used</span>
+            <div className="col-6" key={t.id}>
+              <Card
+                title={t.name}
+                subtitle={`Budget: ${formatCurrency(t.budget)} • Spent: ${formatCurrency(t.spent)}`}
+                variant="teal"
+                gradient
+                footer={
+                  <div className="inline-between">
+                    <a href={`/trips/${t.id}`} className="btn">Open</a>
+                    <span className="badge sun">{pct}% used</span>
+                  </div>
+                }
+              >
+                <div style={{ height: 8, background: 'var(--color-surface-muted)', borderRadius: 999 }}>
+                  <div
+                    style={{
+                      width: `${pct}%`,
+                      height: 8,
+                      borderRadius: 999,
+                      background: 'var(--gradient-accent)',
+                    }}
+                  />
                 </div>
-              }
-            >
-              <div style={{ height: 8, background: 'var(--color-surface-muted)', borderRadius: 999 }}>
-                <div
-                  style={{
-                    width: `${pct}%`,
-                    height: 8,
-                    borderRadius: 999,
-                    background: 'var(--gradient-accent)',
-                  }}
-                />
-              </div>
-            </Card>
+              </Card>
+            </div>
           );
         })}
       </div>

@@ -67,3 +67,74 @@
   .tt-card.variant-peach { background: rgba(246, 199, 182, 0.12); }
   .tt-card.variant-sun { background: rgba(255, 212, 107, 0.10); }
 }
+
+/* Light input helpers inside cards for consistent spacing */
+.tt-card .field {
+  position: relative;
+  display: grid;
+}
+.tt-card .field + .field { margin-top: var(--space-4); }
+.tt-card .field input,
+.tt-card .field select,
+.tt-card .field textarea {
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 14px;
+  color: var(--color-text);
+  transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+.tt-card .field input:focus,
+.tt-card .field select:focus,
+.tt-card .field textarea:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-border));
+  box-shadow: var(--shadow-focus);
+}
+
+/* Floating labels */
+.tt-card .field .label {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+  transition: all .15s ease;
+  background: transparent;
+  padding: 0 6px;
+}
+.tt-card .field input:not(:placeholder-shown) + .label,
+.tt-card .field input:focus + .label,
+.tt-card .field select:focus + .label,
+.tt-card .field select:not([value=""]) + .label,
+.tt-card .field textarea:focus + .label {
+  top: 0;
+  transform: translateY(-50%);
+  font-size: var(--font-size-xs);
+  background: var(--color-surface-muted);
+  border-radius: var(--radius-xs);
+}
+
+/* Category chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-muted);
+  cursor: pointer;
+  transition: transform .1s ease, box-shadow .2s ease, background .2s ease;
+}
+.chip:hover { transform: translateY(-1px); box-shadow: var(--shadow-softer); }
+.chip.active {
+  background: color-mix(in srgb, var(--color-surface) 84%, var(--color-primary));
+  border-color: color-mix(in srgb, var(--color-border) 60%, var(--color-primary));
+}

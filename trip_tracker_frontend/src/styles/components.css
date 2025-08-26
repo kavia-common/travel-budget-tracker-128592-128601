@@ -27,18 +27,54 @@
   padding-inline: var(--space-6);
 }
 
+/* Vertical rhythm helpers */
+.stack-xs > * + * { margin-top: var(--space-2); }
 .stack-sm > * + * { margin-top: var(--space-3); }
 .stack-md > * + * { margin-top: var(--space-5); }
 .stack-lg > * + * { margin-top: var(--space-8); }
 
+/* Grid helpers with consistent gaps and alignment */
 .grid {
   display: grid;
-  gap: var(--space-5);
+  gap: var(--space-6);
+  align-items: stretch;
 }
 .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* Advanced card grids for dashboard/trips consistency */
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+.col-4 { grid-column: span 4; }
+.col-6 { grid-column: span 6; }
+.col-8 { grid-column: span 8; }
+.col-12 { grid-column: span 12; }
+
+@media (max-width: 1200px) {
+  .col-8 { grid-column: span 12; }
+  .col-6 { grid-column: span 12; }
+  .col-4 { grid-column: span 6; }
+}
 @media (max-width: 900px) {
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .grid-cards { grid-template-columns: 1fr; }
+  .col-4, .col-6, .col-8, .col-12 { grid-column: auto; }
+}
+
+/* Inline spacing utilities */
+.inline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.inline-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
 }
 
 /* Buttons */
