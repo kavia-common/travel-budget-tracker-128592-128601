@@ -75,16 +75,57 @@
 
 /* Search-bar-like row behavior */
 .tt-setup-row {
-  grid-template-columns: 2fr 1fr auto 1fr;
+  /* Consistent columns: name grows, total fixed, daily group fixed width but responsive */
+  grid-template-columns: 1.5fr 0.9fr 1.1fr;
   align-items: center;
 }
+
+/* When a row has four fields (desktop only), allow wrap with good spacing via auto-fit */
+@media (min-width: 1101px) {
+  .tt-setup-row {
+    grid-auto-flow: row dense;
+  }
+}
+
+/* Daily group aligns toggle and input tightly */
+.tt-setup-daily-group {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-softer);
+  min-width: 280px;
+}
+.tt-setup-daily-group.disabled {
+  opacity: 0.7;
+  background: var(--color-surface);
+}
+.tt-setup-daily-group.enabled {
+  border-color: color-mix(in srgb, var(--brand-primary) 40%, var(--color-border));
+  box-shadow: var(--shadow-soft);
+}
+
 .tt-setup-daily-toggle {
+  display: inline-flex;
+  align-items: center;
   gap: var(--space-2);
+  min-width: 150px;
+}
+
+.tt-setup-daily-input .label {
+  /* keep label from overlapping switch; slight left padding sync */
+  left: 12px;
 }
 .tt-setup-toggle-label {
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
 }
+
+/* Invite link presentation */
 
 /* Invite link presentation */
 .tt-setup-link .card {
@@ -123,6 +164,11 @@
   .tt-setup-row {
     grid-template-columns: 1fr 1fr;
   }
+  .tt-setup-daily-group {
+    grid-template-columns: auto 1fr;
+    min-width: 0;
+    width: 100%;
+  }
 }
 
 @media (max-width: 800px) {
@@ -140,6 +186,13 @@
   }
   .tt-setup-card {
     border-radius: var(--radius-lg);
+  }
+  .tt-setup-daily-group {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+  .tt-setup-daily-toggle {
+    justify-content: space-between;
   }
 }
 

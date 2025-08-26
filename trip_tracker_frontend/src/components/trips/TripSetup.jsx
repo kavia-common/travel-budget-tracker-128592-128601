@@ -71,7 +71,8 @@ export default function TripSetup() {
           <form onSubmit={handleSubmit} className="stack-md" aria-label="Create a trip">
             {/* Primary search/filter row */}
             <div className="tt-setup-row grid">
-              <div className="field">
+              {/* Trip name (grows) */}
+              <div className="field field--grow">
                 <input
                   name="name"
                   placeholder=" "
@@ -83,6 +84,7 @@ export default function TripSetup() {
                 <span className="label">Trip name</span>
               </div>
 
+              {/* Total budget */}
               <div className="field">
                 <input
                   type="number"
@@ -99,34 +101,41 @@ export default function TripSetup() {
                 <span className="label">Total budget</span>
               </div>
 
-              <div className="inline tt-setup-daily-toggle" style={{ alignItems: 'center' }}>
-                <label className="switch" style={{ cursor: 'pointer' }}>
-                  <input
-                    type="checkbox"
-                    name="useDailyBudget"
-                    checked={form.useDailyBudget}
-                    onChange={handleChange}
-                    aria-label="Use daily budget"
-                  />
-                  <span className="slider" aria-hidden />
-                </label>
-                <span className="tt-setup-toggle-label">Set daily budget</span>
-              </div>
+              {/* Daily budget group: switch + input side by side as a single cohesive control */}
+              <div
+                className={`tt-setup-daily-group ${form.useDailyBudget ? 'enabled' : 'disabled'}`}
+                role="group"
+                aria-label="Daily budget"
+              >
+                <div className="tt-setup-daily-toggle" style={{ alignItems: 'center' }}>
+                  <label className="switch" style={{ cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      name="useDailyBudget"
+                      checked={form.useDailyBudget}
+                      onChange={handleChange}
+                      aria-label="Toggle daily budget"
+                    />
+                    <span className="slider" aria-hidden />
+                  </label>
+                  <span className="tt-setup-toggle-label">Set daily budget</span>
+                </div>
 
-              <div className="field" aria-disabled={!form.useDailyBudget}>
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  min="0"
-                  step="0.01"
-                  name="dailyBudget"
-                  placeholder=" "
-                  value={form.dailyBudget}
-                  onChange={handleChange}
-                  aria-label="Daily budget"
-                  disabled={!form.useDailyBudget}
-                />
-                <span className="label">Daily budget (optional)</span>
+                <div className="field tt-setup-daily-input" aria-disabled={!form.useDailyBudget}>
+                  <input
+                    type="number"
+                    inputMode="decimal"
+                    min="0"
+                    step="0.01"
+                    name="dailyBudget"
+                    placeholder=" "
+                    value={form.dailyBudget}
+                    onChange={handleChange}
+                    aria-label="Daily budget"
+                    disabled={!form.useDailyBudget}
+                  />
+                  <span className="label">Daily budget (optional)</span>
+                </div>
               </div>
             </div>
 

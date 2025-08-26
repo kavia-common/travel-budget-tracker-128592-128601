@@ -85,6 +85,9 @@
   position: relative;
   display: grid;
 }
+.tt-card .field.field--grow {
+  width: 100%;
+}
 .tt-card .field + .field { margin-top: var(--space-4); }
 .tt-card .field input,
 .tt-card .field select,
